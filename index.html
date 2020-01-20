@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF8">
+    <link rel='stylesheet' type='text/css' href='index.css'>
+</head>
+
+<body>
+    <div id="canvas">
+        <div id="popup">
+            <div class="wrap center">
+                <h2>calculating prime numbers</h2>
+            </div>
+            <div class="wrap center">
+                <div id="bar">
+                    <div id="progress"></div>
+                </div>
+            </div>
+        </div>
+        <canvas id="mycanvas" width="10" height="10" tabindex="0"></canvas>
+    </div>
+
+    <div class="menu">
+        <div id="top_menu">
+            <div class="wrap">
+                <button class="button" onclick="render()">RENDER</button>
+            </div>
+        </div>
+        <div id="input_data">
+
+            <h1>--- SETS ---</h1>
+            <div class="wrap center">
+                <div class="box">1</div>
+                <div class="box">2</div>
+                <div class="box">3</div>
+                <div class="box">4</div>
+                <div class="box">5</div>
+                <div class="box">6</div>
+                <div class="box">7</div>
+                <div class="box">8</div>
+            </div>
+            <div class="wrap center">
+                <div class="box">9</div>
+                <div class="box">10</div>
+                <div class="box">11</div>
+                <div class="box">12</div>
+                <div class="box">13</div>
+                <div class="box">14</div>
+                <div class="box">15</div>
+                <div class="box">16</div>
+            </div>
+
+            <div id="prime_num">
+                <div class="wrap center">
+                    <h1 onclick="foldArea(this)">--- PRIME NUMBERS ---</h1>
+                </div>
+                <div class="fold">
+                    <div id="pn_range" class="wrap">
+                        <h2>range to:</h2>
+                        <div class="but minus" onclick="subtract(this, 1, 0)">-</div>
+                        <input value="50000" onkeypress="return isNumber(event)" onchange="fixNumber(this, 0)">
+                        <div class="but plus" onclick="add(this, 1, 0)">+</div>
+                    </div>
+                    <div id="pn_start" class="wrap">
+                        <h2>start num:</h2>
+                        <div class="but minus" onclick="subtract(this, 1, 0)">-</div>
+                        <input value="2" onkeypress="return isNumber(event)" onchange="fixNumber(this, 0)">
+                        <div class="but plus" onclick="add(this, 1, 0)">+</div>
+                    </div>
+                    <div id="match_auto" class="wrap center">
+                        <div class="box" onclick="matchRange()">match to fill all circles</div>
+                    </div>
+                    <div class="wrap center">
+                        <h2>match automatically:</h2>
+                        <label class="container">
+                            <input id="p_auto" type="checkbox" checked="true">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div id="cross">
+                <div class="wrap center">
+                    <h1 onclick="foldArea(this)">--- CROSS</h1>
+                    <label class="container section">
+                        <input id="cr_s" type="checkbox" onclick="sectionOnOff(this)" checked="true">
+                        <span class="checkmark"></span>
+                    </label>
+                    <h1 onclick="foldArea(this)">---</h1>
+                </div>
+                <div class="fold">
+                    <div id="cr_size">
+                        <div class="wrap slim plurality">
+                            <p onclick="" />
+                            <p onclick="" />
+                            <h3>,</h3>
+                            <p onclick="" />
+
+                        </div>
+                        <div class="wrap no_top">
+                            <h2>size:</h2>
+                            <div class="but minus" onclick="subtract(this, 1)">-</div>
+                            <input value="15.0" onkeypress="return isNumber(event)" onchange="fixNumber(this)">
+                            <div class="but plus" onclick="add(this, 1)">+</div>
+                        </div>
+                    </div>
+                    <div id="cr_width" class="wrap">
+                        <h2>width:</h2>
+                        <div class="but minus" onclick="subtract(this)">-</div>
+                        <input value="0.5" onkeypress="return isNumber(event)" onchange="fixNumber(this)">
+                        <div class="but plus" onclick="add(this)">+</div>
+                    </div>
+                    <div id="cr_color" class="wrap">
+                        <h2>color:</h2>
+                        <input type="color" value="#222222">
+                    </div>
+                </div>
+            </div>
+
+            <div id="circles">
+                <div class="wrap center">
+                    <h1>--- CIRCLES</h1>
+                    <label class="container section">
+                        <input id="c_s" type="checkbox" onclick="sectionOnOff(this)" checked="true">
+                        <span class="checkmark"></span>
+                    </label>
+                    <h1>---</h1>
+                </div>
+            </div>
+            <div id="c_step" class="wrap">
+                <h2>step:</h2>
+                <div class="but minus" onclick="subtract(this); matchAuto()">-</div>
+                <input value="10.0" onkeypress="return isNumber(event)" onchange="fixNumber(this); matchAuto()">
+                <div class="but plus" onclick="add(this); matchAuto()">+</div>
+            </div>
+            <div id="c_fix" class="wrap">
+                <h2>adjust to: &nbsp; h:</h2>
+                <label class="container">
+                    <input id="c_w" type="checkbox" onclick="radio(this)" checked>
+                    <span class="checkmark"></span>
+                </label>
+                <h2>w:</h2>
+                <label class="container">
+                    <input id="c_h" type="checkbox" onclick="radio(this)">
+                    <span class="checkmark"></span>
+                </label>
+                <h2>c:</h2>
+                <label class="container">
+                    <input id="c_c" type="checkbox" onclick="radio(this)">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div id="circles">
+                <div id="c_width" class="wrap">
+                    <h2>width:</h2>
+                    <div class="but minus" onclick="subtract(this)">-</div>
+                    <input value="0.5" onkeypress="return isNumber(event)" onchange="fixNumber(this)">
+                    <div class="but plus" onclick="add(this)">+</div>
+                </div>
+                <div id="c_color" class="wrap">
+                    <h2>color:</h2>
+                    <input type="color" value="#222222">
+                </div>
+            </div>
+
+            <h1>--- POINTS ---</h1>
+            <h3>move = lenght of first circle / steps</h3>
+            <div id="p_step" class="wrap">
+                <h2>steps:</h2>
+                <div class="but minus" onclick="subtract(this, 1, 5); calcMove()">-</div>
+                <input value="3.00000" onkeypress="calcMove(); return isNumber(event)" onchange="fixNumber(this, 5)">
+                <div class="but plus" onclick="add(this, 1, 5); calcMove()">+</div>
+            </div>
+            <div id="p_move" class="wrap">
+                <h2>move:</h2>
+                <div class="but minus" onclick="subtract(this, 1, 5); calcSteps()">-</div>
+                <input value="0.00000" onkeypress="calcSteps(); return isNumber(event)" onchange="fixNumber(this, 5)">
+                <div class="but plus" onclick="add(this, 1, 5); calcSteps()">+</div>
+            </div>
+
+            <div id="allpoints">
+                <div class="wrap center">
+                    <h1>--- ALL POINTS</h1>
+                    <label class="container section">
+                        <input id="ap_s" type="checkbox" onclick="sectionOnOff(this)" checked="true">
+                        <span class="checkmark"></span>
+                    </label>
+                    <h1>---</h1>
+                </div>
+                <div id="ap_size" class="wrap">
+                    <h2>size:</h2>
+                    <div class="but minus" onclick="subtract(this)">-</div>
+                    <input value="2.0" onkeypress="return isNumber(event)" onchange="fixNumber(this)">
+                    <div class="but plus" onclick="add(this)">+</div>
+                </div>
+                <div id="ap_color" class="wrap">
+                    <h2>color:</h2>
+                    <input type="color" value="#222222">
+                </div>
+            </div>
+
+            <h1>--- PRIME POINTS ---</h1>
+            <div id="pp_size" class="wrap">
+                <h2>size:</h2>
+                <div class="but minus" onclick="subtract(this)">- </div>
+                <input value="1.0" onkeypress="return isNumber(event)" onchange="fixNumber(this)">
+                <div class="but plus" onclick="add(this)">+</div>
+            </div>
+            <div id="pp_color" class="wrap">
+                <h2>color:</h2>
+                <input type="color" value="#ff0000">
+            </div>
+
+            <h1>--- CONNECTIONS ---</h1>
+            <div class="wrap center">
+                <h2>multiply steps by PI:</h2>
+                <label class="container">
+                    <input id="p_pi" type="checkbox" checked="true">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+
+
+        </div>
+        <div class="shadow"></div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
