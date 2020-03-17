@@ -3,10 +3,12 @@ const canvas = document.getElementById('mycanvas'),
     wa = 2 * Math.PI; //wholeArc
 
 var p = {
-    w: window.innerWidth - document.querySelector('.menu').getBoundingClientRect().width,
-    h: window.innerHeight + 5,
-},
-    pri = [], priReady = false, fold = [];
+        w: window.innerWidth - document.querySelector('.menu').getBoundingClientRect().width,
+        h: window.innerHeight + 5,
+    },
+    pri = [],
+    priReady = false,
+    fold = [];
 
 p.cx = p.w / 2;
 p.cy = p.h / 2;
@@ -67,9 +69,12 @@ function matchAuto() {
 function calcRadius() {
     let type = checkRadio('c_fix');
     switch (type) {
-        case 1: return p.cx - 10;
-        case 2: return Math.sqrt((p.cx * p.cx) + (p.cy * p.cy)) - 10;
-        default: return p.cy - 10;
+        case 1:
+            return p.cx - 10;
+        case 2:
+            return Math.sqrt((p.cx * p.cx) + (p.cy * p.cy)) - 10;
+        default:
+            return p.cy - 10;
     }
 }
 
@@ -126,6 +131,7 @@ function sectionOnOff(item) {
             e.className += ' disabled'
         }
     }
+
     function on(type) {
         let elem = document.querySelectorAll('#' + item.parentElement.parentElement.parentElement.id + ' ' + type);
         for (let e of elem) {
@@ -267,7 +273,9 @@ function render() {
             if (p.ap) {
                 ctx.fillStyle = p.apC;
                 for (let n = 0; n < p.numOf; n++) {
-                    let d = n * p.m, c = p.cS, m = 0;
+                    let d = n * p.m,
+                        c = p.cS,
+                        m = 0;
                     while (m + (wa * c) <= d) {
                         m += wa * c;
                         c += p.cS;
@@ -292,7 +300,9 @@ function render() {
 
             function draw(i) {
                 let pn = pri[i],
-                    d = (pn - p.pnS) * p.m, c = p.cS, m = 0;
+                    d = (pn - p.pnS) * p.m,
+                    c = p.cS,
+                    m = 0;
                 while (m + (wa * c) <= d) {
                     m += (wa * c);
                     c += p.cS;
